@@ -4,6 +4,8 @@
 ## 脚本说明
 基于[Padavan固件](http://www.right.com.cn/forum/thread-161324-1-1.html)开发
 ，支持openwrt（需修改IP获取方式）  
+
+学校服务器IP：  
 广东文理职业学院: 61.146.20.254  
 广东东软学院: 219.128.230.1  
 
