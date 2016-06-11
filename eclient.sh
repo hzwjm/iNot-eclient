@@ -2,12 +2,11 @@
 #Created by Jman on 15/11/15.
 #Copyright © 2015年 Jman. All rights reserved.
 
-name="18998798120"
-passwd="70331351"
-# clientip="10.100.243.197"
-# mac="20:76:93:3C:6A:D8"
+# 帐号，密码，学校服务器IP，模拟终端代码
+name="xxxxxx"
+passwd="xxxxx"
 nasip="61.146.20.254"
-iswifi="4060"
+iswifi="1050"
 
 getIP(){
   clientip=`ifconfig eth2.2|grep inet|awk '{print $2}'|tr -d "addr:"`
