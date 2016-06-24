@@ -15,15 +15,16 @@ getIP(){
 
 getData(){
   secret="Eshore!@#"
+  version="214"
   timestamp=`date +%s`
   if [[ $1 = "challenge" ]]; then
     #statements
-    buffer=$clientip$nasip$mac$timestamp$secret
+    buffer=$version$clientip$nasip$mac$timestamp$secret
     echo $buffer
     md5=`echo -n "$buffer"|md5sum|cut -d ' ' -f1| tr '[a-z]' '[A-Z]'`
-    data="{\"username\":\"$name\",\"clientip\":\"$clientip\",
-    \"nasip\":\"$nasip\",\"mac\":\"$mac\",\"timestamp\":\"$timestamp\",
-    \"authenticator\":\"$md5\"}"
+    data="{\"version\":\"$version\",\"username\":\"$name\",
+    \"clientip\":\"$clientip\",\"nasip\":\"$nasip\",\"mac\":\"$mac\",
+    \"timestamp\":\"$timestamp\",\"authenticator\":\"$md5\"}"
     echo $data
   elif [[ $1 = "login" ]]; then
     #statements
@@ -51,7 +52,7 @@ getData(){
 }
 
 getResponse(){
-  challengead="http://enet.10000.gd.cn:10001/client/challenge"
+  challengead="http://enet.10000.gd.cn:10001/client/vchallenge"
   loginad="http://enet.10000.gd.cn:10001/client/login"
   keepad="http://enet.10000.gd.cn:8001/hbservice/client/active?"
   logoutad="http://enet.10000.gd.cn:10001/client/logout"
