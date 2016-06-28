@@ -5,7 +5,7 @@
 # 帐号，密码，学校服务器IP，模拟终端代码
 name="xxxxxx"
 passwd="xxxxx"
-nasip="61.146.20.254"
+nasip="0.0.0.0"
 iswifi="1050"
 
 getIP(){
@@ -58,18 +58,22 @@ getResponse(){
   logoutad="http://enet.10000.gd.cn:10001/client/logout"
 
   if [[ $1 = "challenge" ]]; then
-    response=`wget -O - -q --post-data="$data" "$challengead"` && code=`echo ${response:14:4}`
+    response=`wget -O - -q --post-data="$data" "$challengead"` && code=`JSON challenge`
     echo $response
   elif [[ $1 = "login" ]]; then
-    response=`wget -O - -q --post-data="$data" "$loginad"` && rescode=`echo ${response:12:1}`
+    response=`wget -O - -q --post-data="$data" "$loginad"` && rescode=`JSON rescode`
     echo $response
   elif [[ $1 = "logout" ]]; then
     response=`wget -O - -q --post-data="$data" "$logoutad"`
     echo "$response"
   elif [[ $1 = "keep" ]]; then
-    response=`wget -O - -q "$keepad$data"` && keepcode=`echo ${response:12:1}`
+    response=`wget -O - -q "$keepad$data"` && keepcode=`JSON rescode`
   fi
 
+}
+
+JSON(){
+    echo $response | awk -F $1 '{print $2}' | awk -F '"' '{print $3}'
 }
 
 Login(){
@@ -95,6 +99,7 @@ Login(){
 }
 
 Logout(){
+  getIP
   getData logout
   getResponse logout
   logger -t "iNot-eclient" "$response"
