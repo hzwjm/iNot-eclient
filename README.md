@@ -39,3 +39,10 @@ if [ "$1" == "up" ]; then
 fi
 ```
 保存，重启
+
+## Openwrt
+需修改IP的获取方式：  
+替换getIP()中的clientip变量
+``` bash
+clientip=`. /lib/functions/network.sh; network_get_ipaddr ip wan; echo $ip`
+```
